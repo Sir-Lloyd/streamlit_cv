@@ -25,6 +25,7 @@ def splitVideo(video):
     cap = cv2.VideoCapture(file)
     try:
         if not os.path.exists('frames'):
+
             os.makedirs('frames', exist_ok=True)
     except OSError:
         print('Error: Creating directory failed')
@@ -42,7 +43,6 @@ def splitVideo(video):
 
 
 def classifyObjects(video):
-    os.rmdir('./frames')
     splitVideo(video)
     model = vgg16.VGG16()
     classifications = []
@@ -70,7 +70,8 @@ def searchObject(searchItem, classes, frames):
         st.write("object not found")
 
 
-def app():        
+def app(): 
+    os.rmdir('.\\frames')
     st.header("Upload Video")
     st.info("Video must be less than 2MB")
 
